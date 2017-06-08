@@ -33,7 +33,7 @@ def play_tic_tac_toe():
     players = get_players()
     for player in cycle(players):
         choice = prompt_player(player)
-        if choice == 'Q'.upper():
+        if choice.upper() == 'Q':
             break
 
 
