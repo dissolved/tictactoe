@@ -1,14 +1,8 @@
 from collections import namedtuple
 from itertools import cycle
+from board import Board
 
 Player = namedtuple('Player', 'name, mark')
-BOARD = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
-
-
-def display(board):
-    col_str = ' {} | {} | {} '
-    row_str = '\n-----------\n'
-    print(row_str.join([col_str.format(*row) for row in board]))
 
 
 def print_header():
@@ -17,10 +11,15 @@ def print_header():
     print('------------------------------------------------------------------')
 
 
-def prompt_player(player):
+def prompt_player(player, board):
     print('\n{}, where do you wish to put your {}?'.format(*player))
-    display(BOARD)
-    return input('Enter 0-8 or [Q]uit: ')
+    board.display()
+    choice = 'none'
+    valid_choices = board.open_cells() + ['Q']
+    prompt_str = 'Enter {}: '.format(', '.join(valid_choices))
+    while choice not in valid_choices:
+        choice = input(prompt_str).upper()
+    return choice
 
 
 def get_players():
@@ -31,9 +30,23 @@ def get_players():
 
 def play_tic_tac_toe():
     players = get_players()
+    board = Board()
     for player in cycle(players):
-        choice = prompt_player(player)
-        if choice.upper() == 'Q':
+        choice = prompt_player(player, board)
+        if choice == 'Q':
+            break
+        else:
+            board.play(choice, player.mark)
+
+        winner = board.winner()
+        if winner:
+            board.display()
+            print('{} wins! Congratulations!!!'.format(winner))
+            break
+
+        if not board.open_cells():
+            board.display()
+            print('Nobody wins... The only winning move is not to play.')
             break
 
 
