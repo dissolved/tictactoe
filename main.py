@@ -2,7 +2,7 @@ from collections import namedtuple
 from itertools import cycle
 
 Player = namedtuple('Player', 'name, mark')
-PROMT_BOARD = ((0, 1, 2), (3, 4, 5), (6, 7, 8))
+BOARD = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
 
 
 def display(board):
@@ -19,7 +19,7 @@ def print_header():
 
 def prompt_player(player):
     print('\n{}, where do you wish to put your {}?'.format(*player))
-    display(PROMT_BOARD)
+    display(BOARD)
     return input('Enter 0-8 or [Q]uit: ')
 
 
@@ -33,7 +33,7 @@ def play_tic_tac_toe():
     players = get_players()
     for player in cycle(players):
         choice = prompt_player(player)
-        if choice == 'Q':
+        if choice == 'Q'.upper():
             break
 
 
