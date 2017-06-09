@@ -34,14 +34,15 @@ def play_tic_tac_toe():
     for player in cycle(players):
         choice = prompt_player(player, board)
         if choice == 'Q':
-            break
+            print("Are we quitting while we're ahead?")
+            return
         else:
             board.play(choice, player.mark)
 
         winner = board.winner()
         if winner:
             board.display()
-            print('{} wins! Congratulations!!!'.format(winner))
+            print('{} wins! Congrats {}!!!'.format(winner, player.name))
             break
 
         if not board.open_cells():
