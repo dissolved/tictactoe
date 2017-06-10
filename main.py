@@ -1,8 +1,6 @@
-from collections import namedtuple
 from itertools import cycle
 from board import Board
-
-Player = namedtuple('Player', 'name, mark')
+from player import Player
 
 
 def print_header():
@@ -11,20 +9,9 @@ def print_header():
     print('------------------------------------------------------------------')
 
 
-def prompt_player(player, board):
-    print('\n{}, where do you wish to put your {}?'.format(*player))
-    board.display()
-    choice = 'none'
-    valid_choices = board.open_cells() + ['Q']
-    prompt_str = 'Enter {}: '.format(', '.join(valid_choices))
-    while choice not in valid_choices:
-        choice = input(prompt_str).upper()
-    return choice
-
-
 def get_players():
-    x = Player(input("Who will play X's? "), 'X')
-    o = Player(input("Who will play O's? "), 'O')
+    x = Player('Human', 'X')
+    o = Player('Computer', 'O', True)
     return (x, o)
 
 
@@ -32,7 +19,7 @@ def play_tic_tac_toe():
     players = get_players()
     board = Board()
     for player in cycle(players):
-        choice = prompt_player(player, board)
+        choice = player.prompt(board)
         if choice == 'Q':
             print("Are we quitting while we're ahead?")
             return

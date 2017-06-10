@@ -18,7 +18,7 @@ class Board():
     def display(self):
         """Display a text representation of the board."""
         representation = '-----------\n'.join([' {} | {} | {} \n']*3)
-        print(representation.format(*self.board))
+        return representation.format(*self.board)
 
     def winner(self):
         """Return mark of winner, if exists, otherwise return None."""
