@@ -1,6 +1,6 @@
 from itertools import cycle
 from board import Board
-from player import Player
+import player as plyr
 
 
 def print_header():
@@ -10,8 +10,8 @@ def print_header():
 
 
 def get_players():
-    x = Player('Human', 'X')
-    o = Player('Computer', 'O', True)
+    x = plyr.Player('X', 'Human')
+    o = plyr.Computer('O')
     return (x, o)
 
 
