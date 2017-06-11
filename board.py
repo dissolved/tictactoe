@@ -12,8 +12,11 @@ class Board():
                   (0, 3, 6), (1, 4, 7), (2, 5, 8),
                   (0, 4, 8), (2, 4, 6))
 
-    def __init__(self):
-        self.board = list(range(1, 10))
+    def __init__(self, state = None):
+        if state:
+            self.board = state
+        else:
+            self.board = list(range(1, 10))
 
     def display(self):
         """Display a text representation of the board."""
