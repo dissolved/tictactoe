@@ -12,7 +12,7 @@ class Board():
                   (0, 3, 6), (1, 4, 7), (2, 5, 8),
                   (0, 4, 8), (2, 4, 6))
 
-    def __init__(self, state = None):
+    def __init__(self, state=None):
         if state:
             self.board = state
         else:
@@ -29,13 +29,13 @@ class Board():
             if len(set([self.board[i] for i in cells])) == 1:
                 return self.board[cells[0]]
 
-    def open_cells(self):
+    def choices(self):
         """Return a list of available plays."""
         return [str(i) for i in self.board if type(i) == int]
 
     def game_over(self):
         """Return True if game is over, otherwise False"""
-        return self.winner() or self.open_cells() == []
+        return self.winner() or self.choices() == []
 
     def play(self, cell, mark):
         """Place the mark in the specified cell."""

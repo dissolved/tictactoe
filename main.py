@@ -9,17 +9,17 @@ def print_header():
     print('------------------------------------------------------------------')
 
 
-def get_players():
-    x = plyr.Player('X', 'Human')
-    o = plyr.Computer('O')
+def get_players(board):
+    x = plyr.Player(board, 'X', 'Human')
+    o = plyr.Computer(board, 'O')
     return (x, o)
 
 
 def play_tic_tac_toe():
-    players = get_players()
     board = Board()
+    players = get_players(board)
     for player in cycle(players):
-        choice = player.prompt(board)
+        choice = player.prompt()
         if choice == 'Q':
             print("Are we quitting while we're ahead?")
             return
@@ -32,7 +32,7 @@ def play_tic_tac_toe():
             print('{} wins! Congrats {}!!!'.format(winner, player.name))
             break
 
-        if not board.open_cells():
+        if not board.choices():
             board.display()
             print('Nobody wins... The only winning move is not to play.')
             break
