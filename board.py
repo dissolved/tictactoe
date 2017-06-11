@@ -30,6 +30,10 @@ class Board():
         """Return a list of available plays."""
         return [str(i) for i in self.board if type(i) == int]
 
+    def game_over(self):
+        """Return True if game is over, otherwise False"""
+        return self.winner() or self.open_cells() == []
+
     def play(self, cell, mark):
         """Place the mark in the specified cell."""
         self.board[self.board.index(int(cell))] = mark

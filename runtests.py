@@ -17,3 +17,8 @@ def test_board_displays_new_game():
 def test_computer_makes_selection():
     choice = plyr.Computer('X').choose_play([1, 5, 9])
     assert choice in ['1', '5', '9']
+
+
+def test_board_game_not_over():
+    b = Board()
+    assert b.game_over() == False
